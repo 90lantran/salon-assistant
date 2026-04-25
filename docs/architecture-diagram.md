@@ -11,7 +11,7 @@ flowchart LR
     assistant["Assistant Route\nPOST /assistant/respond"]
     orchestrator["Conversation Orchestrator"]
     prompt["Salon System Prompt"]
-    model["OpenAI Model\nResponses API"]
+    model["Ollama Model\nResponses API"]
     tools["Local Tool Registry"]
     pricing["Pricing Service"]
     booking["Booking Service"]
