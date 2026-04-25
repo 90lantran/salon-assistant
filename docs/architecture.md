@@ -23,8 +23,8 @@ Assistant flow:
 
 1. Client sends caller utterance to `POST /assistant/respond`.
 2. Orchestrator sends the utterance plus the salon system prompt to the model.
-3. The local Ollama model chooses among local tools such as price lookup, availability, and booking.
-4. Tool results are fed back into the model using Ollama chat tool-call messages.
+3. The model chooses among local tools such as price lookup, availability, and booking.
+4. Tool results are fed back into the model using Responses API function-call outputs.
 5. The assistant returns a short phone-friendly reply.
 
 Suggested delivery order:
