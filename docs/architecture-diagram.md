@@ -55,6 +55,14 @@ flowchart LR
     class staff human;
 ```
 
+## Legend
+
+- Beige `external`: outside-facing systems and transport layers such as the caller, telephony provider, and webhook entrypoint
+- Blue `backend`: application-owned backend components including routes, tool registry, and business services
+- Green `ai`: AI orchestration components including the prompt, orchestrator, and model
+- Orange `data`: persistent storage and source-of-truth data systems
+- Pink `human`: manual fallback or staff-assisted parts of the workflow
+
 ## Reading the Diagram
 
 - `Caller -> Phone Provider -> Voice / Webhook Layer` is the future live-call path.
