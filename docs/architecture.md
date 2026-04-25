@@ -3,7 +3,7 @@
 Core pieces:
 
 - `backend/app/api`: HTTP endpoints and phone webhooks
-- `backend/app/ai`: AI-facing tool definitions and orchestration
+- `backend/app/ai`: AI-facing tool definitions, system prompt, and orchestration
 - `backend/app/db.py`: database engine and shared ORM base
 - `backend/app/services`: business logic for pricing, booking, and feedback
 - `backend/app/models`: database models
@@ -18,6 +18,14 @@ MVP data model:
 - `appointments`: scheduled service visits and booking status
 - `business_hours`: salon opening windows by day of week
 - `feedback`: post-service ratings, comments, and follow-up requests
+
+Assistant flow:
+
+1. Client sends caller utterance to `POST /assistant/respond`.
+2. Orchestrator sends the utterance plus the salon system prompt to the model.
+3. The local Ollama model chooses among local tools such as price lookup, availability, and booking.
+4. Tool results are fed back into the model using Ollama chat tool-call messages.
+5. The assistant returns a short phone-friendly reply.
 
 Suggested delivery order:
 
