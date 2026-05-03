@@ -8,9 +8,10 @@ It currently supports:
 - checking appointment availability
 - creating appointments
 - running an AI assistant endpoint backed by Ollama
+- returning TwiML for a basic Twilio voice flow
 - seeding local demo data for development
 
-It does not fully implement telephony or feedback flows yet. Those routes exist as placeholders.
+It does not fully implement feedback flows yet, and the Twilio call state is still an in-memory MVP.
 
 ## What You Are Building
 
@@ -43,6 +44,7 @@ For AI requests:
 - `app/ai/prompt.py`: assistant system prompt
 - `app/ai/tools.py`: AI tool definitions and tool handlers
 - `app/ai/orchestrator.py`: Ollama chat loop and tool-calling orchestration
+- `app/api/routes/calls.py`: Twilio voice webhooks and TwiML responses
 - `app/services/`: business logic for pricing, booking, and seeding
 - `app/models/`: SQLAlchemy ORM models
 - `app/schemas/`: request and response schemas
@@ -108,6 +110,7 @@ The route files stay thin on purpose.
 - `availability.py` calls `get_available_slots`
 - `appointments.py` calls `create_booking`
 - `assistant.py` calls the AI orchestrator
+- `calls.py` turns Twilio speech webhooks into assistant turns
 
 This keeps business rules out of the HTTP layer.
 
@@ -197,12 +200,13 @@ erDiagram
 | `GET` | `/availability` | Return available slots for a service on a date |
 | `POST` | `/appointments` | Create a new appointment |
 | `POST` | `/assistant/respond` | Run the AI salon assistant |
+| `POST` | `/calls/incoming` | Return TwiML to greet and gather caller input |
+| `POST` | `/calls/process-speech` | Process Twilio speech results and continue the call |
 
 ### Placeholder Endpoints
 
 | Method | Path | Current State |
 | --- | --- | --- |
-| `POST` | `/calls/incoming` | returns `{"status": "not_implemented"}` |
 | `POST` | `/feedback` | returns `{"status": "not_implemented"}` |
 
 ## AI Assistant Architecture

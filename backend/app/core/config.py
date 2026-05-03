@@ -31,6 +31,8 @@ class Settings:
     database_url = _get_setting("DATABASE_URL", "sqlite:///./salon_assistant.db")
     ollama_base_url = _get_setting("OLLAMA_BASE_URL", "http://localhost:11434/api")
     ollama_model = _get_setting("OLLAMA_MODEL", "qwen3")
+    salon_name = _get_setting("SALON_NAME", "the nail salon")
+    twilio_forward_number = _get_setting("TWILIO_FORWARD_NUMBER", "")
 
 
 settings = Settings()
