@@ -1,9 +1,10 @@
 from fastapi import APIRouter
 
-from app.api.routes import appointments, availability, calls, feedback, services
+from app.api.routes import assistant, appointments, availability, calls, feedback, services
 
 
 api_router = APIRouter()
+api_router.include_router(assistant.router, prefix="/assistant", tags=["assistant"])
 api_router.include_router(services.router, prefix="/services", tags=["services"])
 api_router.include_router(
     availability.router, prefix="/availability", tags=["availability"]
